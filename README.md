@@ -1,40 +1,36 @@
-# CT127 Programming for Data Analysis
+# Week 2 homework: pandas practice on the green taxi data
 
-This codespace holds the Python environment for the module. This will be updated constantly, please check for latest updates.
+Use pandas to answer ten questions about the NYC green taxi trips of July 2026. Practise the syntax from the R-to-pandas map in Lab Brief 2.
 
-## What is in this repository
+## Set up
 
-| Item | What it is |
-| --- | --- |
-| `pyproject.toml` | The list of Python packages this codespace uses |
-| `uv.lock` | The exact versions that were installed from that list |
-| `submissions/` | Homework you hand in. Lab work stays outside this folder |
+Create a notebook, `lab2_homework.ipynb`, in `submissions/`. Run this in the first cell:
 
-Run the following commands in the terminal:
+```
+import numpy as np
+import pandas as pd
 
-```bash
-source .venv/bin/activate  # activates env in the terminal
-uv pip list                # lists installed packages
+url = "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2026-07.parquet"
+df = pd.read_parquet(url)
 ```
 
-## Notebooks
+`read_parquet()` reads a parquet file the way `read_csv()` reads a CSV file. Week 3 explains parquet.
 
-Open a `.ipynb` file. If it asks for a kernel, choose **Select Kernel**, then the `.venv` environment. Run a cell with Shift+Enter.
+## Questions
 
-## Python packages
+Answer each question in its own cell. Start the cell with a comment such as `# Q1` and print the answer.
 
-All packages in the environment are managed by `uv` and installed in `.venv`. 
+1. How many rows and columns does `df` have?
+2. What is the type of each column, and how many missing values does each column hold?
+3. List the distinct values of `payment_type` with the number of trips for each. Then convert the column to a category type and print its categories.
+4. What are the mean and the median of `trip_distance`? Which is larger, and what does that suggest?
+5. Show the row at position 10. Then show `fare_amount`, `tip_amount` and `total_amount` for the first three rows.
+6. How many trips are longer than 10 miles?
+7. How many trips were paid by credit card (`payment_type` 1) and carried two or more passengers?
+8. Add a column `fare_per_mile` (`fare_amount` divided by `trip_distance`) for the trips with a distance above 0. What is its mean?
+9. Add a column `long_trip` that is `"Yes"` when `trip_distance` is 5 miles or more and `"No"` otherwise. How many trips are `"Yes"`?
+10. Find the mean of `passenger_count`, then the mean with missing values included (`skipna=False`). If they differ, explain why in a markdown cell.
 
-To add a package, run:
+## Submit
 
-```bash
-uv add <name>
-```
-
-The `uv` manager updates both `pyproject.toml` and `uv.lock` files and installs it. Then restart the notebook kernel to reflect changes.
-
-See `uv` [documentation](https://docs.astral.sh/uv/guides/projects/).
-
-## Terminal
-
-Right-click a folder in the Explorer and choose **Open in Integrated Terminal**. Check that the prompt ends with that folder name before you run a command.
+Run Restart and Run All, then save the notebook in `submissions/` before the week 3 lab.
